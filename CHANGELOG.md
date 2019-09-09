@@ -1,3 +1,9 @@
-## [1.0.0] - TODO: Add release date.
+## [1.0.0] - First release.
 
-* First version release with 4 animations.
+### Additions:
+
+First version released with 4 animations:
+- FlipCircle
+- RotatingSquare
+- FlipBox
+- BouncingGrid
