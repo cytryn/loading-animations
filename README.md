@@ -1,4 +1,4 @@
-# Flutter Loading Animations
+# Flutter Loading Animations [![Pub](https://img.shields.io/pub/v/loading_animations)](https://pub.dev/packages/loading_animations)
 
 A simple yet very customizable set of loading animations for Flutter projects.
 
@@ -10,7 +10,7 @@ Add the following to your `pubspec.yaml` file:
 ...
 dependencies:
   ...
-  loading_animations: "^1.0.0"
+  loading_animations: "^1.0.1"
 ...
 ```
 
