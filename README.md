@@ -70,8 +70,8 @@ LoadingRotatingSquare()
 </td>
 </tr>
 <tr>
-<td align="center"><img src="assets/LoadingFlipCircle.gif" width="200"></td>
-<td align="center"><img src="assets/LoadingRotatingSquare.gif" width="200"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingFlipCircle.gif?raw=true" width="300"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingRotatingSquare.gif?raw=true" width="300"></td>
 </tr>
 <tr>
 <td align="center">
@@ -82,8 +82,8 @@ LoadingBouncingGrid()
 </td>
 </tr>
 <tr>
-<td align="center"><img src="assets/LoadingFlipBox.gif" width="200"></td>
-<td align="center"><img src="assets/LoadingBouncingGrid.gif" width="200"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingFlipBox.gif?raw=true" width="300"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingBouncingGrid.gif?raw=true" width="300"></td>
 </tr>
 
 </table>
