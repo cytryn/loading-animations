@@ -2,43 +2,61 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class LoadingFlipBox extends StatefulWidget {
+class LoadingDoubleFlipping extends StatefulWidget {
   final AnimationController controller;
-  final Color borderColor;
   final Color backgroundColor;
+  final Color borderColor;
   final BoxShape shape;
   final double size;
   final double borderSize;
   final Duration duration;
   final IndexedWidgetBuilder itemBuilder;
 
-  LoadingFlipBox({
+  LoadingDoubleFlipping.circle({
     Key key,
     this.controller,
-    this.borderColor = Colors.transparent,
     this.backgroundColor = Colors.blueGrey,
-    this.shape = BoxShape.rectangle,
+    this.borderColor = Colors.transparent,
     this.size = 50.0,
     this.borderSize,
-    this.itemBuilder, // nao sei pra que serve ainda
+    this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
   })  : assert(borderColor != null,
-            'loading_animations: property [color] must not be null '),
-        assert(shape != null,
-            'loading_animations property [shape] must not be null '),
+            'loading_animations: property [color] must not be null'),
         assert(size != null,
-            'loading_animations property [size] must not be null '),
+            'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize < size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
+        shape = BoxShape.circle,
+        super(key: key);
+
+  LoadingDoubleFlipping.square({
+    Key key,
+    this.controller,
+    this.backgroundColor = Colors.blueGrey,
+    this.borderColor = Colors.transparent,
+    this.size = 50.0,
+    this.borderSize,
+    this.itemBuilder,
+    this.duration = const Duration(milliseconds: 1500),
+  })  : assert(borderColor != null,
+            'loading_animations: property [color] must not be null'),
+        assert(size != null,
+            'loading_animations: property [size] must not be null'),
+        assert(borderSize != null ? borderSize < size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'),
+        assert(duration != null,
+            'loading_animations: property [duration] must not be null'),
+        shape = BoxShape.rectangle,
         super(key: key);
 
   @override
-  _LoadingFlipBoxState createState() => _LoadingFlipBoxState();
+  _LoadingDoubleFlippingState createState() => _LoadingDoubleFlippingState();
 }
 
-class _LoadingFlipBoxState extends State<LoadingFlipBox>
+class _LoadingDoubleFlippingState extends State<LoadingDoubleFlipping>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation1;
