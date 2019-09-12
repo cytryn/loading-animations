@@ -22,10 +22,18 @@ import 'package:loading_animations/loading_animations.dart';
 ## How to use
 
 Choose a loading animation from the list:
-- FlipCircle
-- RotatingSquare
-- FlipBox
-- BouncingGrid
+### LoadingFlipping
+- `LoadingFlipping.circle()`
+- `LoadingFlipping.square()`
+### LoadingRotating
+- `LoadingRotating.square()`
+### LoadingDoubleFlipping
+- `LoadingDoubleFlipping.circle()`
+- `LoadingDoubleFlipping.square()`
+### LoadingBouncingGrid
+- `LoadingBouncingGrid.circle()`
+- `LoadingBouncingGrid.square()`
+
 
 Then add the following code:
 ```dart
@@ -55,12 +63,11 @@ For more customization, please look inside the loading animaton files.
 
 Note: all the animations come ready to go just by calling `LoadingDoubleFlipping.square()`, for example.
 
-Many basic animations contain `.circle()` and `.square()` variations.
+Many basic animations contain `.circle()` and `.square()` variations by default.
 
 ## Examples
 
-For a more true experience of the animations and its variations,
-download the example project and run using `flutter run --profile`.
+For a more true experience of the animations and its variations, download the example project and run using `flutter run --profile`.
 
 <table>
 <tr>
