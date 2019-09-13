@@ -24,6 +24,9 @@ List of animation changes:
 - `LoadingFlipBox()` -> `LoadingDoubleFlipping.circle()` or `.square()`
 - `LoadingBouncingGrid()` -> `LoadingBouncingGrid.circle()` or `.square()`
 
+### Example project
+
+Files got separated from `main.dart` in order to make the examples smaller and more readable.
 
 
 ## [1.0.1] - Updating package details

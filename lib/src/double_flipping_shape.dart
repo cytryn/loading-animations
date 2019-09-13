@@ -108,6 +108,7 @@ class _LoadingDoubleFlippingState extends State<LoadingDoubleFlipping>
         ? widget.itemBuilder(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
+              shape: widget.shape,
               color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,
