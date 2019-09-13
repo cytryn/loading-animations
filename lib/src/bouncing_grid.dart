@@ -42,7 +42,7 @@ class LoadingBouncingGrid extends StatefulWidget {
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Create the LoadingBouncingGrid animation with a circle shape
+  /// Creates the LoadingBouncingGrid animation with a circle shape
   LoadingBouncingGrid.circle({
     Key key,
     this.controller,
@@ -62,7 +62,7 @@ class LoadingBouncingGrid extends StatefulWidget {
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Create the LoadingBouncingGrid animation with a square shape
+  /// Creates the LoadingBouncingGrid animation with a square shape
   LoadingBouncingGrid.square({
     Key key,
     this.controller,

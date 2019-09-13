@@ -1,7 +1,7 @@
-import 'package:example/mixins/row_builder.dart';
 import 'package:flutter/material.dart';
-
 import 'package:loading_animations/loading_animations.dart';
+
+import '../mixins/row_builder.dart';
 
 class FlippingCircleExample extends StatelessWidget with RowBuilder {
   Widget build(BuildContext context) {

@@ -39,7 +39,7 @@ class LoadingFlipping extends StatefulWidget {
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Create the LoadingFlipping animation with a circle shape
+  /// Creates the LoadingFlipping animation with a circle shape
   LoadingFlipping.circle({
     Key key,
     this.controller,
@@ -60,7 +60,7 @@ class LoadingFlipping extends StatefulWidget {
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Create the LoadingFlipping animation with a square shape
+  /// Creates the LoadingFlipping animation with a square shape
   LoadingFlipping.square({
     Key key,
     this.controller,

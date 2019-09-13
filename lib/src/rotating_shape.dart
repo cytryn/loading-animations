@@ -39,7 +39,7 @@ class LoadingRotating extends StatefulWidget {
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Create the LoadingRotating animation with a square shape
+  /// Creates the LoadingRotating animation with a square shape
   LoadingRotating.square({
     Key key,
     this.controller,
