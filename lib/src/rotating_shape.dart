@@ -2,43 +2,69 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class LoadingFlipCircle extends StatefulWidget {
+/// Creates a loading animation that rotates 360 degrees clockwise
+class LoadingRotating extends StatefulWidget {
+  /// Sets an [AnimationController] is case you need to do something
+  /// specific with it like play/pause animation.
   final AnimationController controller;
-  final Color borderColor;
+
+  final BoxShape _shape;
+
+  /// The color of the shape itself.
+  ///
+  /// Default color is set to [Colors.blueGrey].
   final Color backgroundColor;
-  final BoxShape shape;
+
+  /// The color of the border of the shape.
+  ///
+  /// Default color is set to [Colors.transparent].
+  final Color borderColor;
+
+  /// Size of the whole square containing the animation.
+  ///
+  /// Default size is set to [50].
   final double size;
+
+  /// Size of the border of the shape.
+  ///
+  /// Default size is set to [size/8].
   final double borderSize;
+
+  /// Total duration for one cycle of animation.
+  ///
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
+
+  /// Sets an [IndexedWidgetBuilder] function to return
+  /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  LoadingFlipCircle({
+  /// Creates the LoadingRotating animation with a square shape
+  LoadingRotating.square({
     Key key,
     this.controller,
     this.borderColor = Colors.blueGrey,
     this.backgroundColor = Colors.transparent,
-    this.shape = BoxShape.circle,
     this.size = 50.0,
     this.borderSize,
-    this.itemBuilder, // nao sei pra que serve ainda
+    this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
   })  : assert(borderColor != null,
             'loading_animations: property [color] must not be null'),
-        assert(shape != null,
-            'loading_animations property [shape] must not be null'),
-        assert(
-            size != null, 'loading_animations property [size] must not be null'),
+        assert(size != null,
+            'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize < size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
+        _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
-  _LoadingFlipCircleState createState() => _LoadingFlipCircleState();
+  _LoadingRotatingState createState() => _LoadingRotatingState();
 }
 
-class _LoadingFlipCircleState extends State<LoadingFlipCircle>
+class _LoadingRotatingState extends State<LoadingRotating>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
@@ -60,8 +86,7 @@ class _LoadingFlipCircleState extends State<LoadingFlipCircle>
 
   @override
   Widget build(BuildContext context) {
-    final Matrix4 transform = Matrix4.identity()
-      ..rotateY((0 - _animation.value) * 3 * pi);
+    final Matrix4 transform = Matrix4.rotationZ(_animation.value * pi * 2.0);
 
     return Center(
       child: Transform(
@@ -80,11 +105,11 @@ class _LoadingFlipCircleState extends State<LoadingFlipCircle>
         ? widget.itemBuilder(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
-              shape: widget.shape,
-              color: widget.backgroundColor ?? Colors.transparent,
+              shape: widget._shape,
+              color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,
-                width: widget.borderSize ?? widget.size / 6,
+                width: widget.borderSize ?? widget.size / 8,
                 style: BorderStyle.solid,
               ),
             ),
