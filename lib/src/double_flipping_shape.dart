@@ -2,16 +2,44 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Creates a loading animation the flips vertically and then horizontally
 class LoadingDoubleFlipping extends StatefulWidget {
+  /// Sets an [AnimationController] is case you need to do something
+  /// specific with it like play/pause animation.
   final AnimationController controller;
+
+  final BoxShape _shape;
+
+  /// The color of the shape itself.
+  ///
+  /// Default color is set to [Colors.blueGrey].
   final Color backgroundColor;
+
+  /// The color of the border of the shape.
+  ///
+  /// Default color is set to [Colors.transparent].
   final Color borderColor;
-  final BoxShape shape;
+
+  /// Size of the whole square containing the animation.
+  ///
+  /// Default size is set to [50].
   final double size;
+
+  /// Size of the border of the shape.
+  ///
+  /// Default size is set to [size/8].
   final double borderSize;
+
+  /// Total duration for one cycle of animation.
+  ///
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
+
+  /// Sets an [IndexedWidgetBuilder] function to return
+  /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
+  /// Create the LoadingDoubleFlipping animation with a circle shape
   LoadingDoubleFlipping.circle({
     Key key,
     this.controller,
@@ -29,9 +57,10 @@ class LoadingDoubleFlipping extends StatefulWidget {
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
-        shape = BoxShape.circle,
+        _shape = BoxShape.circle,
         super(key: key);
 
+  /// Create the LoadingDoubleFlipping animation with a square shape
   LoadingDoubleFlipping.square({
     Key key,
     this.controller,
@@ -49,7 +78,7 @@ class LoadingDoubleFlipping extends StatefulWidget {
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
-        shape = BoxShape.rectangle,
+        _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
@@ -108,7 +137,7 @@ class _LoadingDoubleFlippingState extends State<LoadingDoubleFlipping>
         ? widget.itemBuilder(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
-              shape: widget.shape,
+              shape: widget._shape,
               color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,

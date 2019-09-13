@@ -2,22 +2,49 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Creates a loading animation that rotates 360 degrees clockwise
 class LoadingRotating extends StatefulWidget {
+  /// Sets an [AnimationController] is case you need to do something
+  /// specific with it like play/pause animation.
   final AnimationController controller;
-  final Color borderColor;
+
+  final BoxShape _shape;
+
+  /// The color of the shape itself.
+  ///
+  /// Default color is set to [Colors.blueGrey].
   final Color backgroundColor;
-  final BoxShape shape;
+
+  /// The color of the border of the shape.
+  ///
+  /// Default color is set to [Colors.transparent].
+  final Color borderColor;
+
+  /// Size of the whole square containing the animation.
+  ///
+  /// Default size is set to [50].
   final double size;
+
+  /// Size of the border of the shape.
+  ///
+  /// Default size is set to [size/8].
   final double borderSize;
+
+  /// Total duration for one cycle of animation.
+  ///
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
+
+  /// Sets an [IndexedWidgetBuilder] function to return
+  /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
+  /// Create the LoadingRotating animation with a square shape
   LoadingRotating.square({
     Key key,
     this.controller,
     this.borderColor = Colors.blueGrey,
     this.backgroundColor = Colors.transparent,
-    // this.shape = BoxShape.rectangle,
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
@@ -30,7 +57,7 @@ class LoadingRotating extends StatefulWidget {
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
-        shape = BoxShape.rectangle,
+        _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
@@ -78,7 +105,7 @@ class _LoadingRotatingState extends State<LoadingRotating>
         ? widget.itemBuilder(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
-              shape: widget.shape,
+              shape: widget._shape,
               color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,
