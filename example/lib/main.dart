@@ -2,6 +2,7 @@ import 'package:example/tabs/bouncing_grid_circle_tab.dart';
 import 'package:example/tabs/bouncing_grid_square_tab.dart';
 import 'package:example/tabs/double_flipping_circle_tab.dart';
 import 'package:example/tabs/double_flipping_square_tab.dart';
+import 'package:example/tabs/filling_square_tab.dart';
 import 'package:example/tabs/rotating_square_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 7,
+        length: 8,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -46,6 +47,13 @@ class MyApp extends StatelessWidget {
                       child: LoadingRotating.square(
                         size: 30,
                         borderColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingFilling.square(
+                        size: 30,
+                        borderColor: Colors.white,
+                        fillingColor: Colors.white70,
                       ),
                     ),
                     Tab(
@@ -81,6 +89,7 @@ class MyApp extends StatelessWidget {
                 FlippingCircleExample(),
                 FlippingSquareExample(),
                 RotatingSquareExample(),
+                FillingSquareExample(),
                 DoubleFlippingCircleExample(),
                 DoubleFlippingSquareExample(),
                 BouncingGridCircleExample(),
