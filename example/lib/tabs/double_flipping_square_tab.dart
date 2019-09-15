@@ -65,11 +65,9 @@ class DoubleFlippingSquareExample extends StatelessWidget with RowBuilder {
             children: <Widget>[
               LoadingDoubleFlipping.square(backgroundColor: Colors.cyan),
               LoadingDoubleFlipping.square(backgroundColor: Colors.blue),
-              LoadingDoubleFlipping.square(
-                  backgroundColor: Colors.deepPurple),
+              LoadingDoubleFlipping.square(backgroundColor: Colors.deepPurple),
               LoadingDoubleFlipping.square(backgroundColor: Colors.pink),
-              LoadingDoubleFlipping.square(
-                  backgroundColor: Colors.deepOrange),
+              LoadingDoubleFlipping.square(backgroundColor: Colors.deepOrange),
             ],
           ),
         ),

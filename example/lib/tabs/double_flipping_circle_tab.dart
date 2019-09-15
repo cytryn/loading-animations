@@ -65,11 +65,9 @@ class DoubleFlippingCircleExample extends StatelessWidget with RowBuilder {
             children: <Widget>[
               LoadingDoubleFlipping.circle(backgroundColor: Colors.cyan),
               LoadingDoubleFlipping.circle(backgroundColor: Colors.blue),
-              LoadingDoubleFlipping.circle(
-                  backgroundColor: Colors.deepPurple),
+              LoadingDoubleFlipping.circle(backgroundColor: Colors.deepPurple),
               LoadingDoubleFlipping.circle(backgroundColor: Colors.pink),
-              LoadingDoubleFlipping.circle(
-                  backgroundColor: Colors.deepOrange),
+              LoadingDoubleFlipping.circle(backgroundColor: Colors.deepOrange),
             ],
           ),
         ),
