@@ -2,43 +2,90 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class LoadingFlipBox extends StatefulWidget {
+/// Creates a loading animation the flips vertically and then horizontally
+class LoadingDoubleFlipping extends StatefulWidget {
+  /// Sets an [AnimationController] is case you need to do something
+  /// specific with it like play/pause animation.
   final AnimationController controller;
-  final Color borderColor;
+
+  final BoxShape _shape;
+
+  /// The color of the shape itself.
+  ///
+  /// Default color is set to [Colors.blueGrey].
   final Color backgroundColor;
-  final BoxShape shape;
+
+  /// The color of the border of the shape.
+  ///
+  /// Default color is set to [Colors.transparent].
+  final Color borderColor;
+
+  /// Size of the whole square containing the animation.
+  ///
+  /// Default size is set to [50].
   final double size;
+
+  /// Size of the border of the shape.
+  ///
+  /// Default size is set to [size/8].
   final double borderSize;
+
+  /// Total duration for one cycle of animation.
+  ///
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
+
+  /// Sets an [IndexedWidgetBuilder] function to return
+  /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  LoadingFlipBox({
+  /// Creates the LoadingDoubleFlipping animation with a circle shape
+  LoadingDoubleFlipping.circle({
     Key key,
     this.controller,
-    this.borderColor = Colors.transparent,
     this.backgroundColor = Colors.blueGrey,
-    this.shape = BoxShape.rectangle,
+    this.borderColor = Colors.transparent,
     this.size = 50.0,
     this.borderSize,
-    this.itemBuilder, // nao sei pra que serve ainda
+    this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(borderColor != null,
-            'loading_animations: property [color] must not be null '),
-        assert(shape != null,
-            'loading_animations property [shape] must not be null '),
+  })  : assert(backgroundColor != null || borderColor != null,
+            'loading_animations: property [color] must not be null'),
         assert(size != null,
-            'loading_animations property [size] must not be null '),
+            'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize < size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
+        _shape = BoxShape.circle,
+        super(key: key);
+
+  /// Creates the LoadingDoubleFlipping animation with a square shape
+  LoadingDoubleFlipping.square({
+    Key key,
+    this.controller,
+    this.backgroundColor = Colors.blueGrey,
+    this.borderColor = Colors.transparent,
+    this.size = 50.0,
+    this.borderSize,
+    this.itemBuilder,
+    this.duration = const Duration(milliseconds: 1500),
+  })  : assert(borderColor != null,
+            'loading_animations: property [color] must not be null'),
+        assert(size != null,
+            'loading_animations: property [size] must not be null'),
+        assert(borderSize != null ? borderSize < size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'),
+        assert(duration != null,
+            'loading_animations: property [duration] must not be null'),
+        _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
-  _LoadingFlipBoxState createState() => _LoadingFlipBoxState();
+  _LoadingDoubleFlippingState createState() => _LoadingDoubleFlippingState();
 }
 
-class _LoadingFlipBoxState extends State<LoadingFlipBox>
+class _LoadingDoubleFlippingState extends State<LoadingDoubleFlipping>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation1;
@@ -90,6 +137,7 @@ class _LoadingFlipBoxState extends State<LoadingFlipBox>
         ? widget.itemBuilder(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
+              shape: widget._shape,
               color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,

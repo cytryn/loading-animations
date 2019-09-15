@@ -1,33 +1,89 @@
 import 'package:flutter/material.dart';
 
+/// Creates a grid with nine shapes that bounces diagonally
 class LoadingBouncingGrid extends StatefulWidget {
+  /// Sets an [AnimationController] is case you need to do something
+  /// specific with it like play/pause animation.
   final AnimationController controller;
-  final Color color;
-  final BoxShape shape;
+
+  final BoxShape _shape;
+
+  /// The color of the shape itself.
+  ///
+  /// Default color is set to [Colors.blueGrey].
+  final Color backgroundColor;
+
+  /// The color of the border of the shape.
+  ///
+  /// Default color is set to [Colors.transparent].
+  final Color borderColor;
+
+  /// Size of the whole square containing the animation.
+  ///
+  /// Default size is set to [50].
   final double size;
+
+  /// Size of the border of each shape in the grid.
+  ///
+  /// Default size is set to [size/24].
+  final double borderSize;
+
+  /// Sets the animation to be inverted
+  ///
+  /// Default value is set to [false].
   final bool inverted;
-  final IndexedWidgetBuilder itemBuilder;
+
+  /// Total duration for one cycle of animation.
+  ///
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
 
-  LoadingBouncingGrid({
+  /// Sets an [IndexedWidgetBuilder] function to return
+  /// your own customized widget.
+  final IndexedWidgetBuilder itemBuilder;
+
+  /// Creates the LoadingBouncingGrid animation with a circle shape
+  LoadingBouncingGrid.circle({
     Key key,
     this.controller,
-    this.color = Colors.blueGrey,
+    this.backgroundColor = Colors.blueGrey,
+    this.borderColor = Colors.transparent,
     this.size = 50.0,
-    this.shape = BoxShape.rectangle,
+    this.borderSize,
     this.inverted = false,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
-                !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
-        assert(shape != null,
-            'loading_animations: property [shape] must not be null'),
+  })  : assert(backgroundColor != null,
+            'loading_animations: property [backgorundColor] must not be null'),
+        assert(borderColor != null,
+            'loading_animations: property [borderColor] must not be null'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
+        assert(borderSize != null ? borderSize < size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
+        _shape = BoxShape.circle,
+        super(key: key);
+
+  /// Creates the LoadingBouncingGrid animation with a square shape
+  LoadingBouncingGrid.square({
+    Key key,
+    this.controller,
+    this.backgroundColor = Colors.blueGrey,
+    this.borderColor = Colors.transparent,
+    this.size = 50.0,
+    this.borderSize,
+    this.inverted = false,
+    this.itemBuilder,
+    this.duration = const Duration(milliseconds: 1500),
+  })  : assert(size != null,
+            'loading_animations: property [size] must not be null'),
+        assert(borderSize != null ? borderSize < size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'),
+        assert(duration != null,
+            'loading_animations: property [duration] must not be null'),
+        _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
@@ -149,8 +205,13 @@ class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
           ? widget.itemBuilder(context, index)
           : DecoratedBox(
               decoration: BoxDecoration(
-                shape: widget.shape,
-                color: widget.color,
+                shape: widget._shape,
+                color: widget.backgroundColor,
+                border: Border.all(
+                  color: widget.borderColor,
+                  width: widget.borderSize ?? widget.size / 24,
+                  style: BorderStyle.solid,
+                ),
               ),
             ),
     );

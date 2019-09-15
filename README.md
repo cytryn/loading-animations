@@ -1,4 +1,4 @@
-# Flutter Loading Animations
+# Flutter Loading Animations [![Pub](https://img.shields.io/pub/v/loading_animations)](https://pub.dev/packages/loading_animations)
 
 A simple yet very customizable set of loading animations for Flutter projects.
 
@@ -10,7 +10,7 @@ Add the following to your `pubspec.yaml` file:
 ...
 dependencies:
   ...
-  loading_animations: "^1.0.0"
+  loading_animations: "^2.0.0"
 ...
 ```
 
@@ -22,27 +22,35 @@ import 'package:loading_animations/loading_animations.dart';
 ## How to use
 
 Choose a loading animation from the list:
-- FlipCircle
-- RotatingSquare
-- FlipBox
-- BouncingGrid
+### LoadingFlipping
+- `LoadingFlipping.circle()`
+- `LoadingFlipping.square()`
+### LoadingRotating
+- `LoadingRotating.square()`
+### LoadingDoubleFlipping
+- `LoadingDoubleFlipping.circle()`
+- `LoadingDoubleFlipping.square()`
+### LoadingBouncingGrid
+- `LoadingBouncingGrid.circle()`
+- `LoadingBouncingGrid.square()`
+
 
 Then add the following code:
 ```dart
-LoadingFlipCircle(
+LoadingFlipping.circle(
   color: Colors.blue,
 );
 ```
 Or you can customize it a bit:
 ```dart
-LoadingFlipCircle(
+LoadingFlipping.square(
   borderColor: Colors.cyan,
   size: 30.0,
 );
 ```
 Or customize it even more!
 ```dart
-LoadingFlipCircle(
+LoadingFlipping.circle(
   borderColor: Colors.cyan,
   borderSize: 3.0,
   size: 30.0,
@@ -53,12 +61,15 @@ LoadingFlipCircle(
 
 For more customization, please look inside the loading animaton files.
 
-Note: all the animations come ready to go just by calling `LoadingFlipBox()`, for example.
+Note: all the animations come ready to go just by calling `LoadingDoubleFlipping.square()`, for example.
+
+Many basic animations contain `.circle()` and `.square()` variations by default.
 
 ## Examples
 
-For a more true experience of the animations and its variations,
-download the example project and run using `flutter run --profile`.
+Note: the following gifs are not yet updated to reflect verison 2.0.0
+
+For a more true experience of the animations and its variations, download the example project and run using `flutter run --profile`.
 
 <table>
 <tr>
@@ -70,8 +81,8 @@ LoadingRotatingSquare()
 </td>
 </tr>
 <tr>
-<td align="center"><img src="assets/LoadingFlipCircle.gif" width="200"></td>
-<td align="center"><img src="assets/LoadingRotatingSquare.gif" width="200"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingFlipCircle.gif?raw=true" width="300"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingRotatingSquare.gif?raw=true" width="300"></td>
 </tr>
 <tr>
 <td align="center">
@@ -82,8 +93,8 @@ LoadingBouncingGrid()
 </td>
 </tr>
 <tr>
-<td align="center"><img src="assets/LoadingFlipBox.gif" width="200"></td>
-<td align="center"><img src="assets/LoadingBouncingGrid.gif" width="200"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingFlipBox.gif?raw=true" width="300"></td>
+<td align="center"><img src="https://github.com/cytryn/loading-animations/blob/master/assets/LoadingBouncingGrid.gif?raw=true" width="300"></td>
 </tr>
 
 </table>
