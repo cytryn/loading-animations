@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Creates a grid with nine shapes that bounces diagonally
+/// Creates a loading animation grid with nine shapes that bounces diagonally
 class LoadingBouncingGrid extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
@@ -53,10 +53,8 @@ class LoadingBouncingGrid extends StatefulWidget {
     this.inverted = false,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgorundColor] must not be null'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null'),
+  })  : assert(backgroundColor != null || borderColor != null,
+            'loading_animations: property [backgorundColor] or [borderColor] must not be null'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize < size / 2 : true,

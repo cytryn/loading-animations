@@ -67,7 +67,7 @@ Many basic animations contain `.circle()` and `.square()` variations by default.
 
 ## Examples
 
-Note: the following gifs are not yet updated to reflect verison 2.0.0
+Note: the following gifs are not yet updated to reflect version 2.0.0
 
 For a more true experience of the animations and its variations, download the example project and run using `flutter run --profile`.
 

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-/// Creates a loading animation the flips vertically and then horizontally
+/// Creates a loading animation that flips vertically and then horizontally
 class LoadingDoubleFlipping extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
@@ -50,7 +50,7 @@ class LoadingDoubleFlipping extends StatefulWidget {
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null || borderColor != null,
-            'loading_animations: property [color] must not be null'),
+            'loading_animations: property [backgorundColor] or [borderColor] must not be null'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize < size / 2 : true,
