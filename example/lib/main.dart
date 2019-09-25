@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
                     Tab(
                       child: LoadingDoubleFlipping.square(
                         size: 30,
-                        backgroundColor: null,
+                        backgroundColor: Colors.white,
                       ),
                     ),
                     Tab(
