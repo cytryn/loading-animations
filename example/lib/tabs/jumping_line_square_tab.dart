@@ -3,25 +3,25 @@ import 'package:loading_animations/loading_animations.dart';
 
 import '../mixins/row_builder.dart';
 
-class BouncingLineCircleExample extends StatelessWidget with RowBuilder {
+class JumpingLineSqaureExample extends StatelessWidget with RowBuilder {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.symmetric(vertical: 16),
       children: <Widget>[
         buildRow(
-          'Default LoadingBouncingLine.circle()',
-          LoadingBouncingLine.circle(),
+          'Default LoadingJumpingLine.square()',
+          LoadingJumpingLine.square(),
         ),
         buildRow(
           'Size Variation',
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              LoadingBouncingLine.circle(size: 30),
-              LoadingBouncingLine.circle(size: 40),
-              LoadingBouncingLine.circle(size: 50),
-              LoadingBouncingLine.circle(size: 60),
-              LoadingBouncingLine.circle(size: 70),
+              LoadingJumpingLine.square(size: 30),
+              LoadingJumpingLine.square(size: 40),
+              LoadingJumpingLine.square(size: 50),
+              LoadingJumpingLine.square(size: 60),
+              LoadingJumpingLine.square(size: 70),
             ],
           ),
         ),
@@ -30,27 +30,27 @@ class BouncingLineCircleExample extends StatelessWidget with RowBuilder {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.transparent,
                 borderColor: Colors.blueGrey,
                 borderSize: 2,
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.transparent,
                 borderColor: Colors.blueGrey,
                 borderSize: 3,
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.transparent,
                 borderColor: Colors.blueGrey,
                 borderSize: 5,
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.transparent,
                 borderColor: Colors.blueGrey,
                 borderSize: 8,
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.transparent,
                 borderColor: Colors.blueGrey,
                 borderSize: 13,
@@ -63,11 +63,11 @@ class BouncingLineCircleExample extends StatelessWidget with RowBuilder {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              LoadingBouncingLine.circle(backgroundColor: Colors.cyan),
-              LoadingBouncingLine.circle(backgroundColor: Colors.blue),
-              LoadingBouncingLine.circle(backgroundColor: Colors.deepPurple),
-              LoadingBouncingLine.circle(backgroundColor: Colors.pink),
-              LoadingBouncingLine.circle(backgroundColor: Colors.deepOrange),
+              LoadingJumpingLine.square(backgroundColor: Colors.cyan),
+              LoadingJumpingLine.square(backgroundColor: Colors.blue),
+              LoadingJumpingLine.square(backgroundColor: Colors.deepPurple),
+              LoadingJumpingLine.square(backgroundColor: Colors.pink),
+              LoadingJumpingLine.square(backgroundColor: Colors.deepOrange),
             ],
           ),
         ),
@@ -76,25 +76,25 @@ class BouncingLineCircleExample extends StatelessWidget with RowBuilder {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.cyan,
-                duration: Duration(milliseconds: 3600),
+                duration: Duration(milliseconds: 2100),
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.blue,
-                duration: Duration(milliseconds: 3300),
+                duration: Duration(milliseconds: 1800),
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.deepPurple,
-                duration: Duration(milliseconds: 3000),
+                duration: Duration(milliseconds: 1500),
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.pink,
-                duration: Duration(milliseconds: 2700),
+                duration: Duration(milliseconds: 1200),
               ),
-              LoadingBouncingLine.circle(
+              LoadingJumpingLine.square(
                 backgroundColor: Colors.deepOrange,
-                duration: Duration(milliseconds: 2400),
+                duration: Duration(milliseconds: 900),
               ),
             ],
           ),

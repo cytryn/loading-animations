@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
-import 'package:example/tabs/bouncing_grid_circle_tab.dart';
-import 'package:example/tabs/bouncing_grid_square_tab.dart';
+
+import 'package:example/tabs/jumping_line_circle_tab.dart';
+import 'package:example/tabs/jumping_line_square_tab.dart';
 import 'package:example/tabs/bouncing_line_circle_tab.dart';
 import 'package:example/tabs/bouncing_line_square_tab.dart';
+import 'package:example/tabs/bouncing_grid_circle_tab.dart';
+import 'package:example/tabs/bouncing_grid_square_tab.dart';
 import 'package:example/tabs/double_flipping_circle_tab.dart';
 import 'package:example/tabs/double_flipping_square_tab.dart';
 import 'package:example/tabs/filling_square_tab.dart';
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 10,
+        length: 12,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -35,13 +38,25 @@ class MyApp extends StatelessWidget {
                     Tab(
                       child: LoadingBouncingLine.circle(
                         size: 30,
-                        borderColor: Colors.white,
+                        backgroundColor: Colors.white,
                       ),
                     ),
                     Tab(
                       child: LoadingBouncingLine.square(
                         size: 30,
-                        borderColor: Colors.white,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingJumpingLine.circle(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingJumpingLine.square(
+                        size: 30,
+                        backgroundColor: Colors.white,
                       ),
                     ),
                     Tab(
@@ -100,7 +115,9 @@ class MyApp extends StatelessWidget {
             body: TabBarView(
               children: <Widget>[
                 BouncingLineCircleExample(),
-                BouncingLineSqaureExample(),
+                BouncingLineSquareExample(),
+                JumpingLineCircleExample(),
+                JumpingLineSqaureExample(),
                 FlippingCircleExample(),
                 FlippingSquareExample(),
                 RotatingSquareExample(),

@@ -25,7 +25,7 @@ class LoadingBouncingGrid extends StatefulWidget {
 
   /// Size of the border of each shape in the grid.
   ///
-  /// Default size is set to [size/24].
+  /// Default size is set to [0].
   final double borderSize;
 
   /// Sets the animation to be inverted
@@ -49,7 +49,7 @@ class LoadingBouncingGrid extends StatefulWidget {
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
-    this.borderSize,
+    this.borderSize = 0,
     this.inverted = false,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
@@ -73,7 +73,7 @@ class LoadingBouncingGrid extends StatefulWidget {
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
-    this.borderSize,
+    this.borderSize = 0,
     this.inverted = false,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
@@ -213,7 +213,7 @@ class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
                 color: widget.backgroundColor,
                 border: Border.all(
                   color: widget.borderColor,
-                  width: widget.borderSize ?? widget.size / 24,
+                  width: widget.borderSize / 3 ?? widget.size / 24,
                   style: BorderStyle.solid,
                 ),
               ),
