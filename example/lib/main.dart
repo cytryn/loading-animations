@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:example/tabs/bouncing_grid_circle_tab.dart';
 import 'package:example/tabs/bouncing_grid_square_tab.dart';
+import 'package:example/tabs/bouncing_line_circle_tab.dart';
+import 'package:example/tabs/bouncing_line_square_tab.dart';
 import 'package:example/tabs/double_flipping_circle_tab.dart';
 import 'package:example/tabs/double_flipping_square_tab.dart';
 import 'package:example/tabs/filling_square_tab.dart';
 import 'package:example/tabs/rotating_square_tab.dart';
-import 'package:flutter/material.dart';
-
-import 'package:loading_animations/loading_animations.dart';
 import 'package:example/tabs/flipping_circle_tab.dart';
 import 'package:example/tabs/flipping_square_tab.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 8,
+        length: 10,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -31,6 +32,18 @@ class MyApp extends StatelessWidget {
                   isScrollable: true,
                   indicatorColor: Colors.white,
                   tabs: <Widget>[
+                    Tab(
+                      child: LoadingBouncingLine.circle(
+                        size: 30,
+                        borderColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingBouncingLine.square(
+                        size: 30,
+                        borderColor: Colors.white,
+                      ),
+                    ),
                     Tab(
                       child: LoadingFlipping.circle(
                         size: 30,
@@ -86,6 +99,8 @@ class MyApp extends StatelessWidget {
             ),
             body: TabBarView(
               children: <Widget>[
+                BouncingLineCircleExample(),
+                BouncingLineSqaureExample(),
                 FlippingCircleExample(),
                 FlippingSquareExample(),
                 RotatingSquareExample(),
