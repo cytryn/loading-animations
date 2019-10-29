@@ -27,7 +27,7 @@ class LoadingJumpingLine extends StatefulWidget {
 
   /// Size of the border of each shape in the line.
   ///
-  /// Default size is set to [0].
+  /// Default size is set to [size/32].
   final double borderSize;
 
   /// Total duration for one cycle of animation.
@@ -46,7 +46,7 @@ class LoadingJumpingLine extends StatefulWidget {
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
-    this.borderSize = 0,
+    this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
@@ -55,7 +55,7 @@ class LoadingJumpingLine extends StatefulWidget {
             'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize < size / 2 : true,
+        assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
@@ -69,7 +69,7 @@ class LoadingJumpingLine extends StatefulWidget {
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
-    this.borderSize = 0,
+    this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
@@ -78,7 +78,7 @@ class LoadingJumpingLine extends StatefulWidget {
             'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize < size / 2 : true,
+        assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
@@ -143,7 +143,9 @@ class _LoadingJumpingLineState extends State<LoadingJumpingLine>
                 color: widget.backgroundColor,
                 border: Border.all(
                   color: widget.borderColor,
-                  width: widget.borderSize / 4 ?? widget.size / 24,
+                  width: widget.borderSize != null
+                      ? widget.borderSize / 4
+                      : widget.size / 32,
                   style: BorderStyle.solid,
                 ),
               ),
