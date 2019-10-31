@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 12,
+        length: 13,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -35,6 +35,12 @@ class MyApp extends StatelessWidget {
                   isScrollable: true,
                   indicatorColor: Colors.white,
                   tabs: <Widget>[
+                    Tab(
+                      child: LoadingFadingLine.circle(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
                     Tab(
                       child: LoadingBouncingLine.circle(
                         size: 30,
@@ -114,6 +120,10 @@ class MyApp extends StatelessWidget {
             ),
             body: TabBarView(
               children: <Widget>[
+                LoadingFadingLine.circle(
+                  // size: 30,
+                  // backgroundColor: Colors.white,
+                ),
                 BouncingLineCircleExample(),
                 BouncingLineSquareExample(),
                 JumpingLineCircleExample(),
