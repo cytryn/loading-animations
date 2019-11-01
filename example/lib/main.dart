@@ -1,3 +1,5 @@
+import 'package:example/tabs/fading_line_circle_tab.dart';
+import 'package:example/tabs/fading_line_square_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 13,
+        length: 14,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -37,6 +39,12 @@ class MyApp extends StatelessWidget {
                   tabs: <Widget>[
                     Tab(
                       child: LoadingFadingLine.circle(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingFadingLine.square(
                         size: 30,
                         backgroundColor: Colors.white,
                       ),
@@ -120,10 +128,8 @@ class MyApp extends StatelessWidget {
             ),
             body: TabBarView(
               children: <Widget>[
-                LoadingFadingLine.circle(
-                  // size: 30,
-                  // backgroundColor: Colors.white,
-                ),
+                FadingLineCircleExample(),
+                FadingLineSquareExample(),
                 BouncingLineCircleExample(),
                 BouncingLineSquareExample(),
                 JumpingLineCircleExample(),

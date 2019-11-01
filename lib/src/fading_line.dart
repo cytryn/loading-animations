@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 /// Creates a loading animation line with three shapes that fades smoothly
@@ -32,7 +30,7 @@ class LoadingFadingLine extends StatefulWidget {
 
   /// Total duration for one cycle of animation.
   ///
-  /// Default value is set to [Duration(milliseconds: 3000)].
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
 
   /// Sets an [IndexedWidgetBuilder] function to return
@@ -48,7 +46,7 @@ class LoadingFadingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 1000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -71,7 +69,7 @@ class LoadingFadingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 1000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -133,8 +131,8 @@ class _LoadingFadingLineState extends State<LoadingFadingLine>
       opacity: Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: _controller,
-          curve: Interval(index / 3, 1 / 3 + (index / 3)),
-          reverseCurve: Interval((2 - index) / 3, 1 / 3 + ((2 - index) / 3)),
+          curve: Interval(index / 3, (1 + index) / 3),
+          reverseCurve: Interval((2 - index) / 3, (3 - index) / 3),
         ),
       ),
       child: _itemBuilder(index),
