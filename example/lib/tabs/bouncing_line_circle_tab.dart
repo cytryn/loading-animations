@@ -10,7 +10,7 @@ class BouncingLineCircleExample extends StatelessWidget with RowBuilder {
       children: <Widget>[
         buildRow(
           'Default LoadingBouncingLine.circle()',
-          LoadingBouncingLine.circle(borderColor: Colors.red),
+          LoadingBouncingLine.circle(),
         ),
         buildRow(
           'Size Variation',
