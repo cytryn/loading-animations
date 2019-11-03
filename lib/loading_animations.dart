@@ -8,3 +8,4 @@ export 'src/filling_shape.dart';
 export 'src/jumping_line.dart';
 export 'src/bouncing_line.dart';
 export 'src/fading_line.dart';
+export 'src/bumping_line.dart';

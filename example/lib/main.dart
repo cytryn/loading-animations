@@ -1,8 +1,10 @@
-import 'package:example/tabs/fading_line_circle_tab.dart';
-import 'package:example/tabs/fading_line_square_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
 
+import 'package:example/tabs/bumping_line_circle_tab.dart';
+import 'package:example/tabs/bumping_line_square_tab.dart';
+import 'package:example/tabs/fading_line_circle_tab.dart';
+import 'package:example/tabs/fading_line_square_tab.dart';
 import 'package:example/tabs/jumping_line_circle_tab.dart';
 import 'package:example/tabs/jumping_line_square_tab.dart';
 import 'package:example/tabs/bouncing_line_circle_tab.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: DefaultTabController(
-        length: 14,
+        length: 16,
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -37,6 +39,18 @@ class MyApp extends StatelessWidget {
                   isScrollable: true,
                   indicatorColor: Colors.white,
                   tabs: <Widget>[
+                    Tab(
+                      child: LoadingBumpingLine.circle(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Tab(
+                      child: LoadingBumpingLine.square(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
                     Tab(
                       child: LoadingFadingLine.circle(
                         size: 30,
@@ -128,6 +142,8 @@ class MyApp extends StatelessWidget {
             ),
             body: TabBarView(
               children: <Widget>[
+                BumpingLineCircleExample(),
+                BumpingLineSquareExample(),
                 FadingLineCircleExample(),
                 FadingLineSquareExample(),
                 BouncingLineCircleExample(),
