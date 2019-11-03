@@ -1,9 +1,7 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
-/// Creates a loading animation line with three shapes that bounces smoothly
-class LoadingBouncingLine extends StatefulWidget {
+/// Creates a loading animation line with three shapes that fades smoothly
+class LoadingFadingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
   final AnimationController controller;
@@ -32,15 +30,15 @@ class LoadingBouncingLine extends StatefulWidget {
 
   /// Total duration for one cycle of animation.
   ///
-  /// Default value is set to [Duration(milliseconds: 3000)].
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Creates the LoadingBouncingLine animation with a circle shape
-  LoadingBouncingLine.circle({
+  /// Creates the LoadingFadingLine animation with a circle shape
+  LoadingFadingLine.circle({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -48,7 +46,7 @@ class LoadingBouncingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -62,8 +60,8 @@ class LoadingBouncingLine extends StatefulWidget {
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Creates the LoadingBouncingLine animation with a square shape
-  LoadingBouncingLine.square({
+  /// Creates the LoadingFadingLine animation with a square shape
+  LoadingFadingLine.square({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -71,7 +69,7 @@ class LoadingBouncingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -86,24 +84,28 @@ class LoadingBouncingLine extends StatefulWidget {
         super(key: key);
 
   @override
-  _LoadingBouncingLineState createState() => _LoadingBouncingLineState();
+  _LoadingFadingLineState createState() => _LoadingFadingLineState();
 }
 
-class _LoadingBouncingLineState extends State<LoadingBouncingLine>
+class _LoadingFadingLineState extends State<LoadingFadingLine>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration);
-
-    _animation = Tween(begin: -math.pi, end: math.pi).animate(_controller)
-      ..addListener(() => setState(() {}));
-
-    _controller.repeat();
+        AnimationController(vsync: this, duration: widget.duration)
+      ..addListener(() => setState(() {}))
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        }
+        if (status == AnimationStatus.dismissed) {
+          _controller.forward();
+        }
+      })
+      ..forward();
   }
 
   @override
@@ -114,19 +116,25 @@ class _LoadingBouncingLineState extends State<LoadingBouncingLine>
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _buildShape(_animation, 0),
+          _buildShape(0),
           SizedBox(width: widget.size / 8),
-          _buildShape(_animation, 1),
+          _buildShape(1),
           SizedBox(width: widget.size / 8),
-          _buildShape(_animation, 2),
+          _buildShape(2),
         ],
       ),
     );
   }
 
-  Widget _buildShape(Animation<double> animation, int index) {
-    return Transform.scale(
-      scale: math.sin(animation.value + (-0.5 * index)).abs(),
+  Widget _buildShape(int index) {
+    return FadeTransition(
+      opacity: Tween(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(index / 3, (1 + index) / 3),
+          reverseCurve: Interval((2 - index) / 3, (3 - index) / 3),
+        ),
+      ),
       child: _itemBuilder(index),
     );
   }

@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-/// Creates a loading animation line with three shapes that bounces smoothly
-class LoadingBouncingLine extends StatefulWidget {
+/// Creates a loading animation line with three shapes that jumps smoothly
+class LoadingJumpingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
   final AnimationController controller;
@@ -32,15 +32,15 @@ class LoadingBouncingLine extends StatefulWidget {
 
   /// Total duration for one cycle of animation.
   ///
-  /// Default value is set to [Duration(milliseconds: 3000)].
+  /// Default value is set to [Duration(milliseconds: 1500)].
   final Duration duration;
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Creates the LoadingBouncingLine animation with a circle shape
-  LoadingBouncingLine.circle({
+  /// Creates the LoadingJumpingLine animation with a circle shape
+  LoadingJumpingLine.circle({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -48,7 +48,7 @@ class LoadingBouncingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -62,8 +62,8 @@ class LoadingBouncingLine extends StatefulWidget {
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Creates the LoadingBouncingLine animation with a square shape
-  LoadingBouncingLine.square({
+  /// Creates the LoadingJumpingLine animation with a square shape
+  LoadingJumpingLine.square({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -71,7 +71,7 @@ class LoadingBouncingLine extends StatefulWidget {
     this.size = 50.0,
     this.borderSize,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration = const Duration(milliseconds: 1500),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -86,10 +86,10 @@ class LoadingBouncingLine extends StatefulWidget {
         super(key: key);
 
   @override
-  _LoadingBouncingLineState createState() => _LoadingBouncingLineState();
+  _LoadingJumpingLineState createState() => _LoadingJumpingLineState();
 }
 
-class _LoadingBouncingLineState extends State<LoadingBouncingLine>
+class _LoadingJumpingLineState extends State<LoadingJumpingLine>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
@@ -125,8 +125,9 @@ class _LoadingBouncingLineState extends State<LoadingBouncingLine>
   }
 
   Widget _buildShape(Animation<double> animation, int index) {
-    return Transform.scale(
-      scale: math.sin(animation.value + (-0.5 * index)).abs(),
+    return Transform.translate(
+      offset: Offset(
+          0, (math.sin(animation.value + (-0.5 * index)) * (widget.size / 4))),
       child: _itemBuilder(index),
     );
   }

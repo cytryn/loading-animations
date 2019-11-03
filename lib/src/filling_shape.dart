@@ -64,7 +64,7 @@ class LoadingFilling extends StatefulWidget {
             'loading_animations: property [fillingColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(size != null,
             'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize < size / 2 : true,
+        assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
             'loading_animations: property [duration] must not be null'),
