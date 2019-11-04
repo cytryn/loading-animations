@@ -10,7 +10,7 @@ Add the following to your `pubspec.yaml` file:
 ...
 dependencies:
   ...
-  loading_animations: "^2.0.0"
+  loading_animations: "^2.1.0"
 ...
 ```
 
@@ -22,17 +22,31 @@ import 'package:loading_animations/loading_animations.dart';
 ## How to use
 
 Choose a loading animation from the list:
-### LoadingFlipping
+### Flipping
 - `LoadingFlipping.circle()`
 - `LoadingFlipping.square()`
-### LoadingRotating
+### Rotating
 - `LoadingRotating.square()`
-### LoadingDoubleFlipping
+### Double Flipping
 - `LoadingDoubleFlipping.circle()`
 - `LoadingDoubleFlipping.square()`
-### LoadingBouncingGrid
+### Bouncing Grid
 - `LoadingBouncingGrid.circle()`
 - `LoadingBouncingGrid.square()`
+### Filling
+- `LoadingFilling.square()`
+### Fading Line
+- `LoadingFadingLine.circle()`
+- `LoadingFadingLine.square()`
+### Bouncing Line
+- `LoadingBouncingLine.circle()`
+- `LoadingBouncingLine.square()`
+### Jumping Line
+- `LoadingJumpingLine.circle()`
+- `LoadingJumpingLine.square()`
+### Bumping Line
+- `LoadingBumpingLine.circle()`
+- `LoadingBumpingLine.square()`
 
 
 Then add the following code:
@@ -59,7 +73,7 @@ LoadingFlipping.circle(
 );
 ```
 
-For more customization, please look inside the loading animaton files.
+For more customization, please look inside the loading animation files.
 
 Note: all the animations come ready to go just by calling `LoadingDoubleFlipping.square()`, for example.
 
@@ -67,7 +81,7 @@ Many basic animations contain `.circle()` and `.square()` variations by default.
 
 ## Examples
 
-Note: the following gifs are not yet updated to reflect version 2.0.0
+> Note: the following gifs are not yet updated to reflect version 2.1.0
 
 For a more true experience of the animations and its variations, download the example project and run using `flutter run --profile`.
 
