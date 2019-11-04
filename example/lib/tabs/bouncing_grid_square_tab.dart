@@ -46,22 +46,27 @@ class BouncingGridSquareExample extends StatelessWidget with RowBuilder {
               LoadingBouncingGrid.square(
                 borderColor: Colors.cyan,
                 backgroundColor: Colors.transparent,
+                borderSize: 2,
               ),
               LoadingBouncingGrid.square(
                 borderColor: Colors.blue,
                 backgroundColor: Colors.transparent,
+                borderSize: 3,
               ),
               LoadingBouncingGrid.square(
                 borderColor: Colors.deepPurple,
                 backgroundColor: Colors.transparent,
+                borderSize: 5,
               ),
               LoadingBouncingGrid.square(
                 borderColor: Colors.pink,
                 backgroundColor: Colors.transparent,
+                borderSize: 8,
               ),
               LoadingBouncingGrid.square(
                 borderColor: Colors.deepOrange,
                 backgroundColor: Colors.transparent,
+                borderSize: 13,
               ),
             ],
           ),

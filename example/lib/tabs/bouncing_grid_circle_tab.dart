@@ -46,22 +46,27 @@ class BouncingGridCircleExample extends StatelessWidget with RowBuilder {
               LoadingBouncingGrid.circle(
                 borderColor: Colors.cyan,
                 backgroundColor: Colors.transparent,
+                borderSize: 2,
               ),
               LoadingBouncingGrid.circle(
                 borderColor: Colors.blue,
                 backgroundColor: Colors.transparent,
+                borderSize: 3,
               ),
               LoadingBouncingGrid.circle(
                 borderColor: Colors.deepPurple,
                 backgroundColor: Colors.transparent,
+                borderSize: 5,
               ),
               LoadingBouncingGrid.circle(
                 borderColor: Colors.pink,
                 backgroundColor: Colors.transparent,
+                borderSize: 8,
               ),
               LoadingBouncingGrid.circle(
                 borderColor: Colors.deepOrange,
                 backgroundColor: Colors.transparent,
+                borderSize: 13,
               ),
             ],
           ),

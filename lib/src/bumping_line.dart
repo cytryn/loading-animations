@@ -1,7 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
-/// Creates a loading animation grid with nine shapes that bounces diagonally
-class LoadingBouncingGrid extends StatefulWidget {
+/// Creates a loading animation line with three shapes that bumps
+class LoadingBumpingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
   final AnimationController controller;
@@ -23,36 +25,30 @@ class LoadingBouncingGrid extends StatefulWidget {
   /// Default size is set to [50].
   final double size;
 
-  /// Size of the border of each shape in the grid.
+  /// Size of the border of each shape in the line.
   ///
-  /// Default size is set to [size/24].
+  /// Default size is set to [size/32].
   final double borderSize;
-
-  /// Sets the animation to be inverted
-  ///
-  /// Default value is set to [false].
-  final bool inverted;
 
   /// Total duration for one cycle of animation.
   ///
-  /// Default value is set to [Duration(milliseconds: 1500)].
+  /// Default value is set to [Duration(milliseconds: 800)].
   final Duration duration;
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Creates the LoadingBouncingGrid animation with a circle shape
-  LoadingBouncingGrid.circle({
+  /// Creates the LoadingBumpingLine animation with a circle shape
+  LoadingBumpingLine.circle({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
     this.borderSize,
-    this.inverted = false,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 1500),
+    this.duration = const Duration(milliseconds: 800),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -66,17 +62,16 @@ class LoadingBouncingGrid extends StatefulWidget {
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Creates the LoadingBouncingGrid animation with a square shape
-  LoadingBouncingGrid.square({
+  /// Creates the LoadingBumpingLine animation with a square shape
+  LoadingBumpingLine.square({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
     this.size = 50.0,
     this.borderSize,
-    this.inverted = false,
     this.itemBuilder,
-    this.duration = const Duration(milliseconds: 1500),
+    this.duration = const Duration(milliseconds: 800),
   })  : assert(backgroundColor != null,
             'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(borderColor != null,
@@ -91,17 +86,13 @@ class LoadingBouncingGrid extends StatefulWidget {
         super(key: key);
 
   @override
-  _LoadingBouncingGridState createState() => _LoadingBouncingGridState();
+  _LoadingBumpingLineState createState() => _LoadingBumpingLineState();
 }
 
-class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
+class _LoadingBumpingLineState extends State<LoadingBumpingLine>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  Animation<double> _animation1,
-      _animation2,
-      _animation3,
-      _animation4,
-      _animation5;
+  Animation<double> _animation1, _animation2;
 
   @override
   void initState() {
@@ -109,38 +100,19 @@ class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
     _controller = widget.controller ??
         AnimationController(vsync: this, duration: widget.duration);
 
-    _animation1 = Tween(begin: -1.0, end: 1.0).animate(
+    _animation1 = Tween(begin: -1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
+        curve: const Interval(0.0, 0.5, curve: Curves.easeInCubic),
+        reverseCurve: const Interval(0.0, 0.5, curve: Curves.easeInCubic),
       ),
     );
 
-    _animation2 = Tween(begin: -1.0, end: 1.0).animate(
+    _animation2 = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.1, 0.7, curve: Curves.easeIn),
-      ),
-    );
-
-    _animation3 = Tween(begin: -1.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.2, 0.8, curve: Curves.easeIn),
-      ),
-    );
-
-    _animation4 = Tween(begin: -1.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.3, 0.9, curve: Curves.easeIn),
-      ),
-    );
-
-    _animation5 = Tween(begin: -1.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
+        curve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
+        reverseCurve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
       ),
     );
 
@@ -156,55 +128,41 @@ class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
       });
 
     _controller.forward();
+    // _controller.repeat();
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
       size: Size.square(widget.size),
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildShape(_animation3, 0),
-              _buildShape(_animation4, 1),
-              _buildShape(_animation5, 2),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildShape(_animation2, 3),
-              _buildShape(_animation3, 4),
-              _buildShape(_animation4, 5),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildShape(_animation1, 6),
-              _buildShape(_animation2, 7),
-              _buildShape(_animation3, 8),
-            ],
-          ),
+          SizedBox(width: widget.size / 8),
+          _buildShape(_animation1, 0),
+          _buildShape(null, 1),
+          _buildShape(_animation2, 2),
+          SizedBox(width: widget.size / 8),
         ],
       ),
     );
   }
 
   Widget _buildShape(Animation<double> animation, int index) {
-    int invertedOffset = widget.inverted ? 1 : 0;
-    return Transform.scale(
-      scale: invertedOffset - animation.value.abs(),
-      child: _itemBuilder(index),
-    );
+    // final int direction = index == 0 ? -1 : 1;
+    // print('direction: $direction');
+    return animation != null
+        ? Transform.translate(
+            offset: Offset(animation.value * widget.size / 4, 0),
+            child: _itemBuilder(index),
+          )
+        : _itemBuilder(index);
   }
 
   Widget _itemBuilder(int index) {
     return SizedBox.fromSize(
-      size: Size.square(widget.size / 3),
+      size: Size.square(widget.size / 4),
       child: widget.itemBuilder != null
           ? widget.itemBuilder(context, index)
           : DecoratedBox(
@@ -214,8 +172,8 @@ class _LoadingBouncingGridState extends State<LoadingBouncingGrid>
                 border: Border.all(
                   color: widget.borderColor,
                   width: widget.borderSize != null
-                      ? widget.borderSize / 3
-                      : widget.size / 24,
+                      ? widget.borderSize / 4
+                      : widget.size / 32,
                   style: BorderStyle.solid,
                 ),
               ),

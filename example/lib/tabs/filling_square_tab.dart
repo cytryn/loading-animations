@@ -79,7 +79,7 @@ class FillingSquareExample extends StatelessWidget with RowBuilder {
               LoadingFilling.square(
                 borderColor: Colors.blue,
                 fillingColor: Colors.blueAccent,
-                duration: Duration(milliseconds: 3600),
+                duration: Duration(milliseconds: 3300),
               ),
               LoadingFilling.square(
                 borderColor: Colors.deepPurple,

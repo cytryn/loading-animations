@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-/// Creates a loading animation that flips vertically and then horizontally
-class LoadingDoubleFlipping extends StatefulWidget {
+/// Creates a loading animation line with three shapes that fades smoothly
+class LoadingFadingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
   final AnimationController controller;
@@ -25,9 +23,9 @@ class LoadingDoubleFlipping extends StatefulWidget {
   /// Default size is set to [50].
   final double size;
 
-  /// Size of the border of the shape.
+  /// Size of the border of each shape in the line.
   ///
-  /// Default size is set to [size/8].
+  /// Default size is set to [size/32].
   final double borderSize;
 
   /// Total duration for one cycle of animation.
@@ -39,8 +37,8 @@ class LoadingDoubleFlipping extends StatefulWidget {
   /// your own customized widget.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Creates the LoadingDoubleFlipping animation with a circle shape
-  LoadingDoubleFlipping.circle({
+  /// Creates the LoadingFadingLine animation with a circle shape
+  LoadingFadingLine.circle({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -54,16 +52,16 @@ class LoadingDoubleFlipping extends StatefulWidget {
         assert(borderColor != null,
             'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
         assert(size != null,
-            'loading_animations: property [size] must not be null.'),
+            'loading_animations: property [size] must not be null'),
         assert(borderSize != null ? borderSize <= size / 2 : true,
-            'loading_animations: property [borderSize] must not be greater than half the widget size.'),
+            'loading_animations: property [borderSize] must not be greater than half the widget size'),
         assert(duration != null,
-            'loading_animations: property [duration] must not be null.'),
+            'loading_animations: property [duration] must not be null'),
         _shape = BoxShape.circle,
         super(key: key);
 
-  /// Creates the LoadingDoubleFlipping animation with a square shape
-  LoadingDoubleFlipping.square({
+  /// Creates the LoadingFadingLine animation with a square shape
+  LoadingFadingLine.square({
     Key key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
@@ -86,70 +84,80 @@ class LoadingDoubleFlipping extends StatefulWidget {
         super(key: key);
 
   @override
-  _LoadingDoubleFlippingState createState() => _LoadingDoubleFlippingState();
+  _LoadingFadingLineState createState() => _LoadingFadingLineState();
 }
 
-class _LoadingDoubleFlippingState extends State<LoadingDoubleFlipping>
+class _LoadingFadingLineState extends State<LoadingFadingLine>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  Animation<double> _animation1;
-  Animation<double> _animation2;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration);
-
-    _animation1 = Tween(begin: 0.0, end: pi).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-      ),
-    )..addListener(() => setState(() {}));
-
-    _animation2 = Tween(begin: 0.0, end: pi).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
-      ),
-    )..addListener(() => setState(() {}));
-
-    _controller.repeat();
+        AnimationController(vsync: this, duration: widget.duration)
+      ..addListener(() => setState(() {}))
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        }
+        if (status == AnimationStatus.dismissed) {
+          _controller.forward();
+        }
+      })
+      ..forward();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Matrix4 transform = Matrix4.identity()
-      ..setEntry(3, 2, 0.005)
-      ..rotateX(_animation1.value)
-      ..rotateY(_animation2.value);
-    return Center(
-      child: Transform(
-        transform: transform,
-        alignment: FractionalOffset.center,
-        child: SizedBox.fromSize(
-          size: Size.square(widget.size),
-          child: _itemBuilder(0),
-        ),
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          _buildShape(0),
+          SizedBox(width: widget.size / 8),
+          _buildShape(1),
+          SizedBox(width: widget.size / 8),
+          _buildShape(2),
+        ],
       ),
     );
   }
 
+  Widget _buildShape(int index) {
+    return FadeTransition(
+      opacity: Tween(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(index / 3, (1 + index) / 3),
+          reverseCurve: Interval((2 - index) / 3, (3 - index) / 3),
+        ),
+      ),
+      child: _itemBuilder(index),
+    );
+  }
+
   Widget _itemBuilder(int index) {
-    return widget.itemBuilder != null
-        ? widget.itemBuilder(context, index)
-        : DecoratedBox(
-            decoration: BoxDecoration(
-              shape: widget._shape,
-              color: widget.backgroundColor,
-              border: Border.all(
-                color: widget.borderColor,
-                width: widget.borderSize ?? widget.size / 8,
-                style: BorderStyle.solid,
+    return SizedBox.fromSize(
+      size: Size.square(widget.size / 4),
+      child: widget.itemBuilder != null
+          ? widget.itemBuilder(context, index)
+          : DecoratedBox(
+              decoration: BoxDecoration(
+                shape: widget._shape,
+                color: widget.backgroundColor,
+                border: Border.all(
+                  color: widget.borderColor,
+                  width: widget.borderSize != null
+                      ? widget.borderSize / 4
+                      : widget.size / 32,
+                  style: BorderStyle.solid,
+                ),
               ),
             ),
-          );
+    );
   }
 
   @override
