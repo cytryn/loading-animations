@@ -1,7 +1,6 @@
 name: loading_animations
 description: A Flutter package with a selection of simple yet very customizable set of loading animations.
 version: 2.1.0
-author: Andre Cytryn <andre@cytryn.com.br>
 homepage: https://github.com/cytryn/loading-animations
 repository: https://github.com/cytryn/loading-animations
 
