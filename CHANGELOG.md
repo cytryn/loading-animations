@@ -1,3 +1,26 @@
+## [2.1.0] - New Animations
+
+### Animations
+
+Added 4 more animations:
+- Bouncing Line
+  - LoadingBouncingLine.circle()
+  - LoadingBouncingLine.square()
+- Bumping Line
+  - LoadingBumpingLine.circle()
+  - LoadingBumpingLine.square()
+- Fading Line
+  - LoadingFadingLine.circle()
+  - LoadingFadingLine.square()
+- Jumping Line
+  - LoadingJumpingLine.circle()
+  - LoadingJumpingLine.circle()
+
+### Example project
+
+Added all the new animations to the example project.
+
+
 ## [2.0.0] - Renaming convention
 
 ### Breaking changes:
