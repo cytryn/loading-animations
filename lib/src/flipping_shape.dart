@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -113,7 +113,7 @@ class _LoadingFlippingState extends State<LoadingFlipping>
   Widget build(BuildContext context) {
     final Matrix4 transform = Matrix4.identity()
       ..setEntry(3, 2, widget._shape == BoxShape.circle ? 0.002 : 0.005)
-      ..rotateY(_animation.value * 3 * -pi);
+      ..rotateY(_animation.value * 3 * -math.pi);
 
     return Center(
       child: Transform(

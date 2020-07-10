@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -88,7 +88,8 @@ class _LoadingRotatingState extends State<LoadingRotating>
 
   @override
   Widget build(BuildContext context) {
-    final Matrix4 transform = Matrix4.rotationZ(_animation.value * pi * 2.0);
+    final Matrix4 transform =
+        Matrix4.rotationZ(_animation.value * math.pi * 2.0);
 
     return Center(
       child: Transform(

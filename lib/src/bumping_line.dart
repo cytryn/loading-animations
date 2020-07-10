@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 /// Creates a loading animation line with three shapes that bumps
@@ -128,7 +126,6 @@ class _LoadingBumpingLineState extends State<LoadingBumpingLine>
       });
 
     _controller.forward();
-    // _controller.repeat();
   }
 
   @override
@@ -150,8 +147,6 @@ class _LoadingBumpingLineState extends State<LoadingBumpingLine>
   }
 
   Widget _buildShape(Animation<double> animation, int index) {
-    // final int direction = index == 0 ? -1 : 1;
-    // print('direction: $direction');
     return animation != null
         ? Transform.translate(
             offset: Offset(animation.value * widget.size / 4, 0),
