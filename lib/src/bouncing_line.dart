@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LoadingBouncingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
-  final AnimationController controller;
+  final AnimationController? controller;
 
   final BoxShape _shape;
 
@@ -28,7 +28,7 @@ class LoadingBouncingLine extends StatefulWidget {
   /// Size of the border of each shape in the line.
   ///
   /// Default size is set to [size/32].
-  final double borderSize;
+  final double? borderSize;
 
   /// Total duration for one cycle of animation.
   ///
@@ -37,11 +37,11 @@ class LoadingBouncingLine extends StatefulWidget {
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   /// Creates the LoadingBouncingLine animation with a circle shape
   LoadingBouncingLine.circle({
-    Key key,
+    Key? key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
@@ -49,22 +49,14 @@ class LoadingBouncingLine extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 3000),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
         _shape = BoxShape.circle,
         super(key: key);
 
   /// Creates the LoadingBouncingLine animation with a square shape
   LoadingBouncingLine.square({
-    Key key,
+    Key? key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
@@ -72,16 +64,8 @@ class LoadingBouncingLine extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 3000),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
         _shape = BoxShape.rectangle,
         super(key: key);
 
@@ -91,8 +75,8 @@ class LoadingBouncingLine extends StatefulWidget {
 
 class _LoadingBouncingLineState extends State<LoadingBouncingLine>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -135,7 +119,7 @@ class _LoadingBouncingLineState extends State<LoadingBouncingLine>
     return SizedBox.fromSize(
       size: Size.square(widget.size / 4),
       child: widget.itemBuilder != null
-          ? widget.itemBuilder(context, index)
+          ? widget.itemBuilder!(context, index)
           : DecoratedBox(
               decoration: BoxDecoration(
                 shape: widget._shape,
@@ -143,7 +127,7 @@ class _LoadingBouncingLineState extends State<LoadingBouncingLine>
                 border: Border.all(
                   color: widget.borderColor,
                   width: widget.borderSize != null
-                      ? widget.borderSize / 4
+                      ? widget.borderSize! / 4
                       : widget.size / 32,
                   style: BorderStyle.solid,
                 ),
@@ -151,6 +135,7 @@ class _LoadingBouncingLineState extends State<LoadingBouncingLine>
             ),
     );
   }
+
 
   @override
   void dispose() {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LoadingRotating extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
-  final AnimationController controller;
+  final AnimationController? controller;
 
   final BoxShape _shape;
 
@@ -28,7 +28,7 @@ class LoadingRotating extends StatefulWidget {
   /// Size of the border of the shape.
   ///
   /// Default size is set to [size/8].
-  final double borderSize;
+  final double? borderSize;
 
   /// Total duration for one cycle of animation.
   ///
@@ -37,11 +37,11 @@ class LoadingRotating extends StatefulWidget {
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   /// Creates the LoadingRotating animation with a square shape
   LoadingRotating.square({
-    Key key,
+    Key? key,
     this.controller,
     this.borderColor = Colors.blueGrey,
     this.backgroundColor = Colors.transparent,
@@ -49,16 +49,8 @@ class LoadingRotating extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
             'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
         _shape = BoxShape.rectangle,
         super(key: key);
 
@@ -68,8 +60,8 @@ class LoadingRotating extends StatefulWidget {
 
 class _LoadingRotatingState extends State<LoadingRotating>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -104,7 +96,7 @@ class _LoadingRotatingState extends State<LoadingRotating>
 
   Widget _itemBuilder(int index) {
     return widget.itemBuilder != null
-        ? widget.itemBuilder(context, index)
+        ? widget.itemBuilder!(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
               shape: widget._shape,
