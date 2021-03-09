@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LoadingFlipping extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
-  final AnimationController controller;
+  final AnimationController? controller;
 
   final BoxShape _shape;
 
@@ -28,7 +28,7 @@ class LoadingFlipping extends StatefulWidget {
   /// Size of the border of the shape.
   ///
   /// Default size is set to [size/8].
-  final double borderSize;
+  final double? borderSize;
 
   /// Total duration for one cycle of animation.
   ///
@@ -37,11 +37,11 @@ class LoadingFlipping extends StatefulWidget {
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   /// Creates the LoadingFlipping animation with a circle shape
   LoadingFlipping.circle({
-    Key key,
+    Key? key,
     this.controller,
     this.borderColor = Colors.blueGrey,
     this.backgroundColor = Colors.transparent,
@@ -49,22 +49,13 @@ class LoadingFlipping extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
-            'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
-        _shape = BoxShape.circle,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'), _shape = BoxShape.circle,
         super(key: key);
 
   /// Creates the LoadingFlipping animation with a square shape
   LoadingFlipping.square({
-    Key key,
+    Key? key,
     this.controller,
     this.borderColor = Colors.blueGrey,
     this.backgroundColor = Colors.transparent,
@@ -72,18 +63,9 @@ class LoadingFlipping extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1500),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
-            'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
-        _shape = BoxShape.rectangle,
-        super(key: key);
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'), _shape = BoxShape.rectangle,
+         super(key: key);
 
   @override
   _LoadingFlippingState createState() => _LoadingFlippingState();
@@ -91,8 +73,8 @@ class LoadingFlipping extends StatefulWidget {
 
 class _LoadingFlippingState extends State<LoadingFlipping>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -129,11 +111,11 @@ class _LoadingFlippingState extends State<LoadingFlipping>
 
   Widget _itemBuilder(int index) {
     return widget.itemBuilder != null
-        ? widget.itemBuilder(context, index)
+        ? widget.itemBuilder!(context, index)
         : DecoratedBox(
             decoration: BoxDecoration(
               shape: widget._shape,
-              color: widget.backgroundColor ?? Colors.transparent,
+              color: widget.backgroundColor,
               border: Border.all(
                 color: widget.borderColor,
                 width: widget.borderSize ?? widget.size / 8,

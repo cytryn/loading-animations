@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LoadingBumpingLine extends StatefulWidget {
   /// Sets an [AnimationController] is case you need to do something
   /// specific with it like play/pause animation.
-  final AnimationController controller;
+  final AnimationController? controller;
 
   final BoxShape _shape;
 
@@ -28,7 +28,7 @@ class LoadingBumpingLine extends StatefulWidget {
   /// Size of the border of each shape in the line.
   ///
   /// Default size is set to [size/32].
-  final double borderSize;
+  final double? borderSize;
 
   /// Total duration for one cycle of animation.
   ///
@@ -37,11 +37,11 @@ class LoadingBumpingLine extends StatefulWidget {
 
   /// Sets an [IndexedWidgetBuilder] function to return
   /// your own customized widget.
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? /*!*/ /*!*/ /*!*/ itemBuilder;
 
   /// Creates the LoadingBumpingLine animation with a circle shape
   LoadingBumpingLine.circle({
-    Key key,
+    Key? key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
@@ -49,22 +49,13 @@ class LoadingBumpingLine extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 800),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
-            'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
-        _shape = BoxShape.circle,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'), _shape = BoxShape.circle,
         super(key: key);
 
   /// Creates the LoadingBumpingLine animation with a square shape
   LoadingBumpingLine.square({
-    Key key,
+    Key? key,
     this.controller,
     this.backgroundColor = Colors.blueGrey,
     this.borderColor = Colors.transparent,
@@ -72,17 +63,8 @@ class LoadingBumpingLine extends StatefulWidget {
     this.borderSize,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 800),
-  })  : assert(backgroundColor != null,
-            'loading_animations: property [backgroundColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(borderColor != null,
-            'loading_animations: property [borderColor] must not be null. Prefer using Colors.transparent instead.'),
-        assert(size != null,
-            'loading_animations: property [size] must not be null'),
-        assert(borderSize != null ? borderSize <= size / 2 : true,
-            'loading_animations: property [borderSize] must not be greater than half the widget size'),
-        assert(duration != null,
-            'loading_animations: property [duration] must not be null'),
-        _shape = BoxShape.rectangle,
+  })  : assert(borderSize != null ? borderSize <= size / 2 : true,
+            'loading_animations: property [borderSize] must not be greater than half the widget size'), _shape = BoxShape.rectangle,
         super(key: key);
 
   @override
@@ -91,8 +73,8 @@ class LoadingBumpingLine extends StatefulWidget {
 
 class _LoadingBumpingLineState extends State<LoadingBumpingLine>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation1, _animation2;
+  late AnimationController _controller;
+  late Animation<double> _animation1, _animation2;
 
   @override
   void initState() {
@@ -141,7 +123,7 @@ class _LoadingBumpingLineState extends State<LoadingBumpingLine>
         children: <Widget>[
           SizedBox(width: widget.size / 8),
           _buildShape(_animation1, 0),
-          _buildShape(null, 1),
+          _itemBuilder(1),
           _buildShape(_animation2, 2),
           SizedBox(width: widget.size / 8),
         ],
@@ -150,21 +132,17 @@ class _LoadingBumpingLineState extends State<LoadingBumpingLine>
   }
 
   Widget _buildShape(Animation<double> animation, int index) {
-    // final int direction = index == 0 ? -1 : 1;
-    // print('direction: $direction');
-    return animation != null
-        ? Transform.translate(
-            offset: Offset(animation.value * widget.size / 4, 0),
-            child: _itemBuilder(index),
-          )
-        : _itemBuilder(index);
+    return Transform.translate(
+      offset: Offset(animation.value * widget.size / 4, 0),
+      child: _itemBuilder(index),
+    );
   }
 
   Widget _itemBuilder(int index) {
     return SizedBox.fromSize(
       size: Size.square(widget.size / 4),
       child: widget.itemBuilder != null
-          ? widget.itemBuilder(context, index)
+          ? widget.itemBuilder!(context, index)
           : DecoratedBox(
               decoration: BoxDecoration(
                 shape: widget._shape,
@@ -172,7 +150,7 @@ class _LoadingBumpingLineState extends State<LoadingBumpingLine>
                 border: Border.all(
                   color: widget.borderColor,
                   width: widget.borderSize != null
-                      ? widget.borderSize / 4
+                      ? widget.borderSize! / 4
                       : widget.size / 32,
                   style: BorderStyle.solid,
                 ),
