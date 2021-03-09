@@ -1,3 +1,7 @@
+## [2.2.0] - Null safety update
+
+Thanks to @Ali1Ammar for the update on null safety
+
 ## [2.1.0] - New Animations
 
 ### Animations
