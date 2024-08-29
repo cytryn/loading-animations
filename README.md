@@ -126,9 +126,9 @@ Create an issue or a pull request and I will be more than happy to review it and
 
 ## Thanks
 
-This project was heavily based on https://cssfx.dev/
+This project was heavily based on cssfx
 
-If you like this package, dont forget to hit the ⭐️ button!
+If you like this package, don't forget to hit the ⭐️ button!
 
 Thanks and happy coding 👻
 
